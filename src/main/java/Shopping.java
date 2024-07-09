@@ -32,7 +32,7 @@ public class Shopping {
     }
 
     //Главное меню
-    public static int menu() {
+    private static int menu() {
         System.out.println("\nВыберите одну из команд:");
         System.out.println("    1. Добавить товар в список");
         System.out.println("    2. Показать список");
@@ -42,25 +42,26 @@ public class Shopping {
         try {
             return scanner.nextInt();
         } catch (InputMismatchException e) {
-            scanner = new Scanner(System.in); //Пересоздаем сканер, чтобы очистить в кеше некорректное значение
+            scanner = new Scanner(System.in); //Пересоздаем scanner для очистки значений в кеше
             return 0;
         }
     }
 
     //1. Добавить товар в список
-    public static void addItem() {
+    private static void addItem() {
 
         System.out.println("Введите наименование товара:");
 
-        String productName = scanner.next();
+        scanner = new Scanner(System.in); //Пересоздаем scanner для очистки значений в кеше
+        String productName = scanner.nextLine();
 
         for (int i = 0; i < shoppingList.length; i++) {
             if (shoppingList[i] == null) {
                 shoppingList[i] = productName;
-                System.out.println("    Товар " + productName + " добавлен в список под номером " + (i + 1));
+                System.out.println("Товар " + productName + " добавлен в список под номером " + (i + 1));
                 break;
             } else if (shoppingList[i].equals(productName)) {
-                System.out.println("    Товар " + productName + " имеется в списке под номером " + (i + 1));
+                System.out.println("Товар " + productName + " имеется в списке под номером " + (i + 1));
                 break;
             } else if (shoppingList[shoppingList.length - 1] != null){
                 newShoppingList(shoppingList);
