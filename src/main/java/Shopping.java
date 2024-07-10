@@ -12,39 +12,25 @@ public class Shopping {
 
         while (true) {
             switch (menu()) {
-                case 1:
-                    addItem();
-                    break;
-                case 2:
-                    showList(shoppingList);
-                    break;
-                case 3:
-                    allRemove();
-                    break;
-                case 4:
-                    exit();
-                    break;
-                default:
-                    incorrectInput();
+                case "1" -> addItem();
+                case "2" -> showList(shoppingList);
+                case "3" -> allRemove();
+                case "4" -> exit();
+                default -> incorrectInput();
             }
         }
 
     }
 
     //Главное меню
-    private static int menu() {
+    private static String menu() {
         System.out.println("\nВыберите одну из команд:");
         System.out.println("    1. Добавить товар в список");
         System.out.println("    2. Показать список");
         System.out.println("    3. Очистить список");
         System.out.println("    4. Завершить работу");
 
-        try {
-            return scanner.nextInt();
-        } catch (InputMismatchException e) {
-            scanner = new Scanner(System.in); //Пересоздаем scanner для очистки значений в кеше
-            return 0;
-        }
+        return scanner.nextLine();
     }
 
     //1. Добавить товар в список
@@ -107,7 +93,7 @@ public class Shopping {
 
     //Увеличить массив списка покупок
     private static void newShoppingList(String[] fullShoppingList) {
-        shoppingList = new String[fullShoppingList.length + 1]; //Пересоздаем массив с большим размером, затерев значения
+        shoppingList = new String[fullShoppingList.length + fullShoppingList.length / 2]; //Пересоздаем массив с большим размером, затерев значения
         System.arraycopy(fullShoppingList, 0, shoppingList, 0, fullShoppingList.length); //Копируем массив полученный на вход в увеличенный массив
     }
 }
